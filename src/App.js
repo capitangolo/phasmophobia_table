@@ -1,41 +1,46 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
+
+
 class App extends React.Component {
+
   constructor() {
     super();
 
     this.Evidences = {
       emf: {
-        name: "EMF Level 5",
+        name: "emf",
         value: 1
       },
       fingerprints: {
-        name: "Fingerprints",
+        name: "fingerprints",
         value: 2
       },
       temp: {
-        name: "Freezing Temperatures",
+        name: "temp",
         value: 4
       },
       orbs: {
-        name: "Ghost Orb",
+        name: "orbs",
         value: 8
       },
       writing: {
-        name: "Ghost Writing",
+        name: "writing",
         value: 16
       },
       box: {
-        name: "Spirit Box",
+        name: "box",
         value: 32
       },
       footprints: {
-        name: "Footprints",
+        name: "footprints",
         value: 64
       }
     }
+
     this.Ghosts = [
       {
-        name: "Banshee",
+        name: "banshee",
         evidences: this.Evidences.emf.value
                  + this.Evidences.fingerprints.value
                  + this.Evidences.temp.value
@@ -43,90 +48,90 @@ class App extends React.Component {
 
       },
       {
-        name: "Demon",
+        name: "demon",
         evidences: this.Evidences.temp.value
                  + this.Evidences.writing.value
                  + this.Evidences.box.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Jinn",
+        name: "jinn",
         evidences: this.Evidences.emf.value
                  + this.Evidences.orbs.value
                  + this.Evidences.box.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Mare",
+        name: "mare",
         evidences: this.Evidences.temp.value
                  + this.Evidences.orbs.value
                  + this.Evidences.box.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Oni",
+        name: "oni",
         evidences: this.Evidences.emf.value
                  + this.Evidences.writing.value
                  + this.Evidences.box.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Phantom",
+        name: "phantom",
         evidences: this.Evidences.emf.value
                  + this.Evidences.temp.value
                  + this.Evidences.orbs.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Poltergeist",
+        name: "poltergeist",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.orbs.value
                  + this.Evidences.box.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Revenant",
+        name: "revenant",
         evidences: this.Evidences.emf.value
                  + this.Evidences.fingerprints.value
                  + this.Evidences.writing.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Shade",
+        name: "shade",
         evidences: this.Evidences.emf.value
                  + this.Evidences.orbs.value
                  + this.Evidences.writing.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Spirit",
+        name: "spirit",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.writing.value
                  + this.Evidences.box.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Wraith",
+        name: "wraith",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.temp.value
                  + this.Evidences.box.value
       },
       {
-        name: "Yurei",
+        name: "yurei",
         evidences: this.Evidences.temp.value
                  + this.Evidences.orbs.value
                  + this.Evidences.writing.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Yokai",
+        name: "yokai",
         evidences: this.Evidences.orbs.value
                  + this.Evidences.writing.value
                  + this.Evidences.box.value
                  + this.Evidences.footprints.value
       },
       {
-        name: "Hantu",
+        name: "hantu",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.orbs.value
                  + this.Evidences.writing.value
@@ -143,7 +148,7 @@ class App extends React.Component {
     this.toggleEvidence = this.toggleEvidence.bind(this);
   }
 
-  toggleEvidence(evidence){
+  toggleEvidence(evidence) {
     // evidence = 0010
     // value    = 0111
     // ----------------
@@ -203,17 +208,19 @@ class App extends React.Component {
     return (
       <div>
       <div>
-        <h1>Possible Evidences</h1>
+        <h1><FormattedMessage id="Evidence.list.title"/></h1>
         <ul>
           {Object.entries(this.Evidences).map((item) => <EvidenceButton evidence={item[1]} callback={this.toggleEvidence} state={this.state} />)}
         </ul>
       </div>
       <div>
-        <h1>Possible Ghosts</h1>
+        <h1><FormattedMessage id="Ghost.list.title"/></h1>
         <ul>
           {this.state.possible_ghosts.map((item) => <Ghost ghost={item} missing={this.calculateMissing(item)} />)}
         </ul>
-        <button onClick={this.addGhost}> Add Ghost </button>
+      </div>
+      <div>
+        <p>Check the code <a href="https://github.com/capitangolo/phasmophobia_table">in GitHub</a></p>
       </div>
       </div>
     );
@@ -221,20 +228,25 @@ class App extends React.Component {
 }
 
 class Ghost extends React.Component {
-   render() {
-      var missing = ""
+  render() {
+    var missing = []
 
-      if (this.props.missing.length > 0) {
-        var missing_names = this.props.missing.map((item) => {
-          return item[1].name
-        })
-        missing = missing_names.join(", ")
-      }
+    if (this.props.missing.length > 0) {
+      var missing_names = this.props.missing.map((item) => {
+        return item[1].name
+      })
+      missing = missing_names
+    }
 
-      return (
-        <li><b>{this.props.ghost.name}:</b> {missing}</li>
-      );
-   }
+    var ghost_name_key = "Ghost." + this.props.ghost.name + ".name"
+
+    return (
+      <li>
+        <b><FormattedMessage id={ghost_name_key} defaultMessage={this.props.ghost.name} />:</b>
+        {missing.map((name) => <span style={{margin: "10px"}} ><FormattedMessage id={"Evidence." + name + ".name"} defaultMessage={name} /></span>)}
+      </li>
+    );
+  }
 }
 
 class EvidenceButton extends Component {
@@ -246,18 +258,25 @@ class EvidenceButton extends Component {
     var value = this.props.evidence.value
     var has_evidence = (this.props.state.evidences_yes & value) == value
     var not_evidence = (this.props.state.evidences_not & value) == value
+    var evidence_name_key = "Evidence." + this.props.evidence.name + ".name"
 
     if ( has_evidence ) {
       return (
-        <li><button style={{"background-color": "green"}} onClick={this.handleClick}>{this.props.evidence.name}</button></li>
+        <li><button style={{"background-color": "green"}} onClick={this.handleClick}>
+          <FormattedMessage id={evidence_name_key} defaultMessage={this.props.evidence.name} />
+        </button></li>
       );
     } else if ( not_evidence ) {
       return (
-        <li><button style={{"background-color": "red"}} onClick={this.handleClick}>{this.props.evidence.name}</button></li>
+        <li><button style={{"background-color": "red"}} onClick={this.handleClick}>
+          <FormattedMessage id={evidence_name_key} defaultMessage={this.props.evidence.name} />
+        </button></li>
       );
     } else {
       return (
-        <li><button onClick={this.handleClick}>{this.props.evidence.name}</button></li>
+        <li><button onClick={this.handleClick}>
+          <FormattedMessage id={evidence_name_key} defaultMessage={this.props.evidence.name} />
+        </button></li>
       );
     }
   }
