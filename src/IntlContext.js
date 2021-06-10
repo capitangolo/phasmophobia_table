@@ -5,7 +5,7 @@
 //  https://github.com/austintackaberry/i18n-example/blob/master/src/index.js
 
 import React from "react";
-import { IntlProvider, addLocaleData } from "react-intl";
+import { IntlProvider } from "react-intl";
 
 import localeData from "./locales/data.json";
 import qs from "qs";

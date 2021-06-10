@@ -31,11 +31,11 @@ class App extends React.Component {
       box: {
         name: "box",
         value: 32
-      },
+      }/*,
       footprints: {
         name: "footprints",
         value: 64
-      }
+      }*/
     }
 
     this.Ghosts = [
@@ -44,7 +44,6 @@ class App extends React.Component {
         evidences: this.Evidences.emf.value
                  + this.Evidences.fingerprints.value
                  + this.Evidences.temp.value
-                 + this.Evidences.footprints.value
 
       },
       {
@@ -52,63 +51,54 @@ class App extends React.Component {
         evidences: this.Evidences.temp.value
                  + this.Evidences.writing.value
                  + this.Evidences.box.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "jinn",
         evidences: this.Evidences.emf.value
                  + this.Evidences.orbs.value
                  + this.Evidences.box.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "mare",
         evidences: this.Evidences.temp.value
                  + this.Evidences.orbs.value
                  + this.Evidences.box.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "oni",
         evidences: this.Evidences.emf.value
                  + this.Evidences.writing.value
                  + this.Evidences.box.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "phantom",
         evidences: this.Evidences.emf.value
                  + this.Evidences.temp.value
                  + this.Evidences.orbs.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "poltergeist",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.orbs.value
                  + this.Evidences.box.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "revenant",
         evidences: this.Evidences.emf.value
                  + this.Evidences.fingerprints.value
                  + this.Evidences.writing.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "shade",
         evidences: this.Evidences.emf.value
                  + this.Evidences.orbs.value
                  + this.Evidences.writing.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "spirit",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.writing.value
                  + this.Evidences.box.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "wraith",
@@ -121,21 +111,18 @@ class App extends React.Component {
         evidences: this.Evidences.temp.value
                  + this.Evidences.orbs.value
                  + this.Evidences.writing.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "yokai",
         evidences: this.Evidences.orbs.value
                  + this.Evidences.writing.value
                  + this.Evidences.box.value
-                 + this.Evidences.footprints.value
       },
       {
         name: "hantu",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.orbs.value
                  + this.Evidences.writing.value
-                 + this.Evidences.footprints.value
       }
     ]
 
@@ -153,8 +140,8 @@ class App extends React.Component {
     // value    = 0111
     // ----------------
     // and      = 0010
-    var has_evidence = (this.state.evidences_yes & evidence) == evidence
-    var not_evidence = (this.state.evidences_not & evidence) == evidence
+    var has_evidence = (this.state.evidences_yes & evidence) === evidence
+    var not_evidence = (this.state.evidences_not & evidence) === evidence
     var new_evidences_yes = this.state.evidences_yes
     var new_evidences_not = this.state.evidences_not
 
@@ -182,13 +169,13 @@ class App extends React.Component {
       // ghost    = 0111
       // ----------------
       // and      = 0110
-      var matches_yes = (ghost.evidences & evidences_yes) == evidences_yes
+      var matches_yes = (ghost.evidences & evidences_yes) === evidences_yes
 
       // evidence = 1001
       // ghost    = 0111
       // ----------------
       // and      = 0001
-      var matches_not = (ghost.evidences & evidences_not) != 0
+      var matches_not = (ghost.evidences & evidences_not) !== 0
 
       return matches_yes && !matches_not
     })
@@ -199,7 +186,7 @@ class App extends React.Component {
 
     var missing_evidences = Object.entries(this.Evidences).filter((item) => {
       var evidence = item[1]
-      return( (missing & evidence.value) == evidence.value )
+      return( (missing & evidence.value) === evidence.value )
     })
     return missing_evidences
   }
@@ -209,15 +196,15 @@ class App extends React.Component {
       <div>
       <div>
         <h1><FormattedMessage id="Evidence.list.title"/></h1>
-        <ul>
+        <div class="div-container">
           {Object.entries(this.Evidences).map((item) => <EvidenceButton evidence={item[1]} callback={this.toggleEvidence} state={this.state} />)}
-        </ul>
+        </div>
       </div>
       <div>
         <h1><FormattedMessage id="Ghost.list.title"/></h1>
-        <ul>
+        <table>
           {this.state.possible_ghosts.map((item) => <Ghost ghost={item} missing={this.calculateMissing(item)} />)}
-        </ul>
+        </table>
       </div>
       <div>
         <p>Check the code <a href="https://github.com/capitangolo/phasmophobia_table">in GitHub</a></p>
@@ -241,10 +228,14 @@ class Ghost extends React.Component {
     var ghost_name_key = "Ghost." + this.props.ghost.name + ".name"
 
     return (
-      <li>
-        <b><FormattedMessage id={ghost_name_key} defaultMessage={this.props.ghost.name} />:</b>
-        {missing.map((name) => <span style={{margin: "10px"}} ><FormattedMessage id={"Evidence." + name + ".name"} defaultMessage={name} /></span>)}
-      </li>
+      <tr>
+        <th>
+          <FormattedMessage id={ghost_name_key} defaultMessage={this.props.ghost.name} />
+        </th>
+        <td>
+          {missing.map((name) => <img src={"img/" + name + ".svg"} width="50px" height="50px" alt={name} />)}
+        </td>
+      </tr>
     );
   }
 }
@@ -256,29 +247,20 @@ class EvidenceButton extends Component {
 
   render() {
     var value = this.props.evidence.value
-    var has_evidence = (this.props.state.evidences_yes & value) == value
-    var not_evidence = (this.props.state.evidences_not & value) == value
-    var evidence_name_key = "Evidence." + this.props.evidence.name + ".name"
+    var has_evidence = (this.props.state.evidences_yes & value) === value
+    var not_evidence = (this.props.state.evidences_not & value) === value
+    // var evidence_name_key = "Evidence." + this.props.evidence.name + ".name"
+    var css_class = has_evidence ? "green" : not_evidence ? "red" : ""
+    var img_url = "img/" + this.props.evidence.name + ".svg"
 
-    if ( has_evidence ) {
-      return (
-        <li><button style={{"background-color": "green"}} onClick={this.handleClick}>
-          <FormattedMessage id={evidence_name_key} defaultMessage={this.props.evidence.name} />
-        </button></li>
-      );
-    } else if ( not_evidence ) {
-      return (
-        <li><button style={{"background-color": "red"}} onClick={this.handleClick}>
-          <FormattedMessage id={evidence_name_key} defaultMessage={this.props.evidence.name} />
-        </button></li>
-      );
-    } else {
-      return (
-        <li><button onClick={this.handleClick}>
-          <FormattedMessage id={evidence_name_key} defaultMessage={this.props.evidence.name} />
-        </button></li>
-      );
-    }
+    return (
+      <div class="grid-item">
+        <button class="evidence" onClick={this.handleClick}>
+          <img class={css_class} src={img_url} width="100%" height="100%"
+               alt={this.props.evidence.name} />
+        </button>
+      </div>
+    );
   }
 }
 export default App;
