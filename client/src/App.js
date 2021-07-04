@@ -1,9 +1,30 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import socketIOClient from "socket.io-client";
-//const ENDPOINT = "http://localhost:8089";
+import qs from "qs";
+
+function makeid(length) {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+// Hash from url query
+const queryhash = qs.parse(window.location.search, { ignoreQueryPrefix: true }).hash
+const hash = queryhash || makeid(6)
+if ( !queryhash ) {
+  window.history.replaceState(null, "", "/?hash="+hash)
+}
 
 let socket = socketIOClient();
+socket.on('connect', function() {
+  socket.emit('register', hash);
+});
+
 
 class App extends React.Component {
 
@@ -163,6 +184,7 @@ class App extends React.Component {
 
     this.setEvidences(new_evidences_yes, new_evidences_not);
     socket.emit('evidence_updated', {
+      hash: hash,
       yes: new_evidences_yes,
       not: new_evidences_not
     } );
@@ -223,6 +245,7 @@ class App extends React.Component {
         </table>
       </div>
       <div>
+        <p><a href={"overlay/?hash=" + hash}>OBS Overlay</a></p>
         <p>Check the code <a href="https://github.com/capitangolo/phasmophobia_table">in GitHub</a></p>
       </div>
       </div>

@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import socketIOClient from "socket.io-client";
-//const ENDPOINT = "http://localhost:8089";
+import qs from "qs";
+
+// Hash from url query
+const hash = qs.parse(window.location.search, { ignoreQueryPrefix: true }).hash
 
 let socket = socketIOClient();
+socket.on('connect', function() {
+  socket.emit('register', hash);
+});
 
 class OverlayApp extends React.Component {
 
