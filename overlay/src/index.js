@@ -2,15 +2,14 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-import App from './App';
+import OverlayApp from './OverlayApp';
 import { IntlProviderWrapper } from "./IntlContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <IntlProviderWrapper>
-      <App />
+      <OverlayApp />
     </IntlProviderWrapper>
   </React.StrictMode>,
   document.getElementById('root')
 );
-

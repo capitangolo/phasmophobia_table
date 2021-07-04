@@ -5,7 +5,7 @@ import socketIOClient from "socket.io-client";
 
 let socket = socketIOClient();
 
-class App extends React.Component {
+class OverlayApp extends React.Component {
 
   constructor() {
     super();
@@ -211,19 +211,9 @@ class App extends React.Component {
     return (
       <div>
       <div>
-        <h1><FormattedMessage id="Evidence.list.title"/></h1>
         <div class="div-container">
           {Object.entries(this.Evidences).map((item) => <EvidenceButton evidence={item[1]} callback={this.toggleEvidence} state={this.state} />)}
         </div>
-      </div>
-      <div>
-        <h1><FormattedMessage id="Ghost.list.title"/></h1>
-        <table>
-          {this.state.possible_ghosts.map((item) => <Ghost ghost={item} missing={this.calculateMissing(item)} />)}
-        </table>
-      </div>
-      <div>
-        <p>Check the code <a href="https://github.com/capitangolo/phasmophobia_table">in GitHub</a></p>
       </div>
       </div>
     );
@@ -258,7 +248,7 @@ class Ghost extends React.Component {
 
 class EvidenceButton extends Component {
   handleClick = () => {
-    this.props.callback(this.props.evidence.value);
+    this.props.callback(this.props.evidence.value)
   }
 
   render() {
@@ -269,6 +259,7 @@ class EvidenceButton extends Component {
     var css_class = has_evidence ? "green" : not_evidence ? "red" : ""
     var img_url = "img/" + this.props.evidence.name + ".svg"
 
+    if ( has_evidence || not_evidence ) {
     return (
       <div class="grid-item">
         <button class="evidence" onClick={this.handleClick}>
@@ -276,7 +267,10 @@ class EvidenceButton extends Component {
                alt={this.props.evidence.name} />
         </button>
       </div>
-    );
+    )
+    } else {
+      return null
+    }
   }
 }
-export default App;
+export default OverlayApp

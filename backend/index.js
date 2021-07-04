@@ -9,6 +9,7 @@ const io = new Server(server);
 
 // Rutes
 app.use('/',express.static('../client/build'))
+app.use('/overlay',express.static('../overlay/build'))
 //app.get('/public', (req, res) => {
 //express.static('files')
 //  res.sendFile(__dirname + '../client/build');
