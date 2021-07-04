@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
+import socketIOClient from "socket.io-client";
+//const ENDPOINT = "http://localhost:8089";
 
+let socket = socketIOClient();
 
 class App extends React.Component {
 
@@ -133,6 +136,12 @@ class App extends React.Component {
     }
 
     this.toggleEvidence = this.toggleEvidence.bind(this);
+
+    console.log(socket)
+
+    socket.on("evidence_updated", evidences => {
+      this.setEvidences(evidences.yes, evidences.not);
+    });
   }
 
   toggleEvidence(evidence) {
@@ -154,6 +163,15 @@ class App extends React.Component {
       new_evidences_yes = this.state.evidences_yes + evidence
     }
 
+    this.setEvidences(new_evidences_yes, new_evidences_not);
+    socket.emit('evidence_updated', {
+      yes: new_evidences_yes,
+      not: new_evidences_not
+    } );
+  }
+
+
+  setEvidences(new_evidences_yes, new_evidences_not) {
     var new_possible_ghosts = this.calculateGhosts(this.Ghosts, new_evidences_yes, new_evidences_not)
 
     this.setState({
