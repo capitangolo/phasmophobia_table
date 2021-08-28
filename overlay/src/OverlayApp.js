@@ -40,99 +40,112 @@ class OverlayApp extends React.Component {
       box: {
         name: "box",
         value: 32
-      }/*,
-      footprints: {
-        name: "footprints",
+      },
+      dots: {
+        name: "dots",
         value: 64
-      }*/
+      }
     }
 
     this.Ghosts = [
       {
         name: "banshee",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.fingerprints.value
-                 + this.Evidences.temp.value
+        evidences: this.Evidences.fingerprints.value
+                 + this.Evidences.dots.value
+                 + this.Evidences.orbs.value
 
       },
       {
         name: "demon",
-        evidences: this.Evidences.temp.value
+        evidences: this.Evidences.fingerprints.value
                  + this.Evidences.writing.value
-                 + this.Evidences.box.value
+                 + this.Evidences.temp.value
       },
       {
         name: "jinn",
         evidences: this.Evidences.emf.value
-                 + this.Evidences.orbs.value
-                 + this.Evidences.box.value
+                 + this.Evidences.fingerprints.value
+                 + this.Evidences.temp.value
       },
       {
         name: "mare",
-        evidences: this.Evidences.temp.value
+        evidences: this.Evidences.writing.value
                  + this.Evidences.orbs.value
                  + this.Evidences.box.value
       },
       {
         name: "oni",
         evidences: this.Evidences.emf.value
-                 + this.Evidences.writing.value
-                 + this.Evidences.box.value
+                 + this.Evidences.temp.value
+                 + this.Evidences.dots.value
       },
       {
         name: "phantom",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.temp.value
-                 + this.Evidences.orbs.value
+        evidences: this.Evidences.box.value
+                 + this.Evidences.fingerprints.value
+                 + this.Evidences.dots.value
       },
       {
         name: "poltergeist",
-        evidences: this.Evidences.fingerprints.value
-                 + this.Evidences.orbs.value
-                 + this.Evidences.box.value
+        evidences: this.Evidences.box.value
+                 + this.Evidences.fingerprints.value
+                 + this.Evidences.writing.value
       },
       {
         name: "revenant",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.fingerprints.value
+        evidences: this.Evidences.orbs.value
+                 + this.Evidences.temp.value
                  + this.Evidences.writing.value
       },
       {
         name: "shade",
         evidences: this.Evidences.emf.value
-                 + this.Evidences.orbs.value
+                 + this.Evidences.temp.value
                  + this.Evidences.writing.value
       },
       {
         name: "spirit",
-        evidences: this.Evidences.fingerprints.value
+        evidences: this.Evidences.emf.value
                  + this.Evidences.writing.value
                  + this.Evidences.box.value
       },
       {
         name: "wraith",
-        evidences: this.Evidences.fingerprints.value
-                 + this.Evidences.temp.value
+        evidences: this.Evidences.emf.value
+                 + this.Evidences.dots.value
                  + this.Evidences.box.value
       },
       {
         name: "yurei",
         evidences: this.Evidences.temp.value
                  + this.Evidences.orbs.value
-                 + this.Evidences.writing.value
+                 + this.Evidences.dots.value
       },
       {
         name: "yokai",
         evidences: this.Evidences.orbs.value
-                 + this.Evidences.writing.value
+                 + this.Evidences.dots.value
                  + this.Evidences.box.value
       },
       {
         name: "hantu",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.orbs.value
+                 + this.Evidences.temp.value
+      },
+      {
+        name: "goryo",
+        evidences: this.Evidences.emf.value
+                 + this.Evidences.fingerprints.value
+                 + this.Evidences.dots.value
+      },
+      {
+        name: "myling",
+        evidences: this.Evidences.fingerprints.value
+                 + this.Evidences.emf.value
                  + this.Evidences.writing.value
       }
+
     ]
 
     this.state = {

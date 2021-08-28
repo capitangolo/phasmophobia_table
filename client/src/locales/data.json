@@ -22,7 +22,9 @@
     "Ghost.wraith.name": "Wraith",
     "Ghost.yurei.name": "Yurei",
     "Ghost.yokai.name": "Yokai",
-    "Ghost.hantu.name": "Hantu"
+    "Ghost.hantu.name": "Hantu",
+    "Ghost.goryo.name": "Goryo",
+    "Ghost.myling.name": "Myling"
   },
   "es": {
     "Evidence.list.title": "Evidencias",
@@ -47,6 +49,8 @@
     "Ghost.wraith.name": "Espectro",
     "Ghost.yurei.name": "Yurei",
     "Ghost.yokai.name": "Yokai",
-    "Ghost.hantu.name": "Hantu"
+    "Ghost.hantu.name": "Hantu",
+    "Ghost.goryo.name": "Goryo",
+    "Ghost.myling.name": "Myling"
   }
 }
