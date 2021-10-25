@@ -14,10 +14,16 @@ function makeid(length) {
 }
 
 // Hash from url query
+const lang = qs.parse(window.location.search, { ignoreQueryPrefix: true }).lang
 const queryhash = qs.parse(window.location.search, { ignoreQueryPrefix: true }).hash
 const hash = queryhash || makeid(6)
 if ( !queryhash ) {
-  window.history.replaceState(null, "", "/?hash="+hash)
+  let state = "/?"
+  if ( lang ) {
+    state += "lang=" + lang + "&"
+  }
+  state += "hash=" + hash
+  window.history.replaceState(null, "", state)
 }
 
 let socket = socketIOClient();
