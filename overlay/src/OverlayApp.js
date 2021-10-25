@@ -144,8 +144,31 @@ class OverlayApp extends React.Component {
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.emf.value
                  + this.Evidences.writing.value
+      },
+      {
+        name: "onryo",
+        evidences: this.Evidences.box.value
+                 + this.Evidences.orbs.value
+                 + this.Evidences.temp.value
+      },
+      {
+        name: "twins",
+        evidences: this.Evidences.emf.value
+                 + this.Evidences.box.value
+                 + this.Evidences.temp.value
+      },
+      {
+        name: "raiju",
+        evidences: this.Evidences.emf.value
+                 + this.Evidences.orbs.value
+                 + this.Evidences.dots.value
+      },
+      {
+        name: "obake",
+        evidences: this.Evidences.fingerprints.value
+                 + this.Evidences.emf.value
+                 + this.Evidences.orbs.value
       }
-
     ]
 
     this.state = {

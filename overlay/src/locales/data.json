@@ -24,7 +24,11 @@
     "Ghost.yokai.name": "Yokai",
     "Ghost.hantu.name": "Hantu",
     "Ghost.goryo.name": "Goryo",
-    "Ghost.myling.name": "Myling"
+    "Ghost.myling.name": "Myling",
+    "Ghost.onryo.name": "Onryo",
+    "Ghost.twins.name": "The Twins",
+    "Ghost.raiju.name": "Raiju",
+    "Ghost.obake.name": "Obake"
   },
   "es": {
     "Evidence.list.title": "Evidencias",
@@ -51,6 +55,11 @@
     "Ghost.yokai.name": "Yokai",
     "Ghost.hantu.name": "Hantu",
     "Ghost.goryo.name": "Goryo",
-    "Ghost.myling.name": "Myling"
+    "Ghost.myling.name": "Myling",
+    "Ghost.onryo.name": "Onryo",
+    "Ghost.twins.name": "Los Gemelos",
+    "Ghost.raiju.name": "Raiju",
+    "Ghost.obake.name": "Obake"
+
   }
 }
