@@ -73,128 +73,148 @@ class App extends React.Component {
         name: "banshee",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.dots.value
-                 + this.Evidences.orbs.value
-
+                 + this.Evidences.orbs.value,
+        evicences_optional: 0
       },
       {
         name: "demon",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.writing.value
-                 + this.Evidences.temp.value
+                 + this.Evidences.temp.value,
+        evicences_optional: 0
       },
       {
         name: "jinn",
         evidences: this.Evidences.emf.value
                  + this.Evidences.fingerprints.value
-                 + this.Evidences.temp.value
+                 + this.Evidences.temp.value,
+        evicences_optional: 0
       },
       {
         name: "mare",
         evidences: this.Evidences.writing.value
                  + this.Evidences.orbs.value
-                 + this.Evidences.box.value
+                 + this.Evidences.box.value,
+        evicences_optional: 0
       },
       {
         name: "oni",
         evidences: this.Evidences.emf.value
                  + this.Evidences.temp.value
-                 + this.Evidences.dots.value
+                 + this.Evidences.dots.value,
+        evicences_optional: 0
       },
       {
         name: "phantom",
         evidences: this.Evidences.box.value
                  + this.Evidences.fingerprints.value
-                 + this.Evidences.dots.value
+                 + this.Evidences.dots.value,
+        evicences_optional: 0
       },
       {
         name: "poltergeist",
         evidences: this.Evidences.box.value
                  + this.Evidences.fingerprints.value
-                 + this.Evidences.writing.value
+                 + this.Evidences.writing.value,
+        evicences_optional: 0
       },
       {
         name: "revenant",
         evidences: this.Evidences.orbs.value
                  + this.Evidences.temp.value
-                 + this.Evidences.writing.value
+                 + this.Evidences.writing.value,
+        evicences_optional: 0
       },
       {
         name: "shade",
         evidences: this.Evidences.emf.value
                  + this.Evidences.temp.value
-                 + this.Evidences.writing.value
+                 + this.Evidences.writing.value,
+        evicences_optional: 0
       },
       {
         name: "spirit",
         evidences: this.Evidences.emf.value
                  + this.Evidences.writing.value
-                 + this.Evidences.box.value
+                 + this.Evidences.box.value,
+        evicences_optional: 0
       },
       {
         name: "wraith",
         evidences: this.Evidences.emf.value
                  + this.Evidences.dots.value
-                 + this.Evidences.box.value
+                 + this.Evidences.box.value,
+        evicences_optional: 0
       },
       {
         name: "yurei",
         evidences: this.Evidences.temp.value
                  + this.Evidences.orbs.value
-                 + this.Evidences.dots.value
+                 + this.Evidences.dots.value,
+        evicences_optional: 0
       },
       {
         name: "yokai",
         evidences: this.Evidences.orbs.value
                  + this.Evidences.dots.value
-                 + this.Evidences.box.value
+                 + this.Evidences.box.value,
+        evicences_optional: 0
       },
       {
         name: "hantu",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.orbs.value
-                 + this.Evidences.temp.value
+                 + this.Evidences.temp.value,
+        evicences_optional: 0
       },
       {
         name: "goryo",
         evidences: this.Evidences.emf.value
                  + this.Evidences.fingerprints.value
-                 + this.Evidences.dots.value
+                 + this.Evidences.dots.value,
+        evicences_optional: 0
       },
       {
         name: "myling",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.emf.value
-                 + this.Evidences.writing.value
+                 + this.Evidences.writing.value,
+        evicences_optional: 0
       },
       {
         name: "onryo",
         evidences: this.Evidences.box.value
                  + this.Evidences.orbs.value
-                 + this.Evidences.temp.value
+                 + this.Evidences.temp.value,
+        evicences_optional: 0
       },
       {
         name: "twins",
         evidences: this.Evidences.emf.value
                  + this.Evidences.box.value
-                 + this.Evidences.temp.value
+                 + this.Evidences.temp.value,
+        evicences_optional: 0
       },
       {
         name: "raiju",
         evidences: this.Evidences.emf.value
                  + this.Evidences.orbs.value
-                 + this.Evidences.dots.value
+                 + this.Evidences.dots.value,
+        evicences_optional: 0
       },
       {
         name: "obake",
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.emf.value
-                 + this.Evidences.orbs.value
+                 + this.Evidences.orbs.value,
+        evicences_optional: 0
       },
       {
         name: "mimic",
         evidences: this.Evidences.box.value
                  + this.Evidences.fingerprints.value
-                 + this.Evidences.temp.value
+                 + this.Evidences.temp.value,
+        evicences_optional: this.Evidences.orbs.value
       }
     ]
 
@@ -256,6 +276,7 @@ class App extends React.Component {
       // ----------------
       // and      = 0110
       var matches_yes = (ghost.evidences & evidences_yes) === evidences_yes
+      var matches_optional = ((ghost.evidences + ghost.evicences_optional) & evidences_yes) === evidences_yes
 
       // evidence = 1001
       // ghost    = 0111
@@ -263,18 +284,33 @@ class App extends React.Component {
       // and      = 0001
       var matches_not = (ghost.evidences & evidences_not) !== 0
 
-      return matches_yes && !matches_not
+      return (matches_yes || matches_optional) && !matches_not
     })
   }
 
   calculateMissing(ghost) {
-    var missing = ghost.evidences - this.state.evidences_yes
+    // evidence = 1011
+    // evidence = 0100 <- Negate
+    // ghost    = 0101
+    // ----------------
+    // and      = 0100
+    var missing = ghost.evidences & (~this.state.evidences_yes)
 
     var missing_evidences = Object.entries(this.Evidences).filter((item) => {
       var evidence = item[1]
       return( (missing & evidence.value) === evidence.value )
     })
     return missing_evidences
+  }
+
+  calculateOptional(ghost) {
+    var optional = ghost.evicences_optional & (~this.state.evidences_yes)
+
+    var missing_optional = Object.entries(this.Evidences).filter((item) => {
+      var evidence = item[1]
+      return( (optional & evidence.value) === evidence.value )
+    })
+    return missing_optional
   }
 
   render() {
@@ -289,7 +325,7 @@ class App extends React.Component {
       <div>
         <h1><FormattedMessage id="Ghost.list.title"/></h1>
         <table>
-          {this.state.possible_ghosts.map((item) => <Ghost ghost={item} missing={this.calculateMissing(item)} />)}
+          {this.state.possible_ghosts.map((item) => <Ghost ghost={item} missing={this.calculateMissing(item)} optional={this.calculateOptional(item)} />)}
         </table>
       </div>
       <div>
@@ -304,12 +340,20 @@ class App extends React.Component {
 class Ghost extends React.Component {
   render() {
     var missing = []
+    var optional = []
 
     if (this.props.missing.length > 0) {
       var missing_names = this.props.missing.map((item) => {
         return item[1].name
       })
       missing = missing_names
+    }
+
+    if (this.props.optional.length > 0) {
+      var optional_names = this.props.optional.map((item) => {
+        return item[1].name
+      })
+      optional = optional_names
     }
 
     var ghost_name_key = "Ghost." + this.props.ghost.name + ".name"
@@ -321,6 +365,9 @@ class Ghost extends React.Component {
         </th>
         <td>
           {missing.map((name) => <img src={"img/" + name + ".svg"} width="50px" height="50px" alt={name} />)}
+        </td>
+        <td>
+          {optional.map((name) => <img src={"img/" + name + ".svg"} width="50px" height="50px" class="optional" alt={name} />)}
         </td>
       </tr>
     );

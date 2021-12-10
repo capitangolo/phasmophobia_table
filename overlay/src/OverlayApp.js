@@ -47,140 +47,9 @@ class OverlayApp extends React.Component {
       }
     }
 
-    this.Ghosts = [
-      {
-        name: "banshee",
-        evidences: this.Evidences.fingerprints.value
-                 + this.Evidences.dots.value
-                 + this.Evidences.orbs.value
-
-      },
-      {
-        name: "demon",
-        evidences: this.Evidences.fingerprints.value
-                 + this.Evidences.writing.value
-                 + this.Evidences.temp.value
-      },
-      {
-        name: "jinn",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.fingerprints.value
-                 + this.Evidences.temp.value
-      },
-      {
-        name: "mare",
-        evidences: this.Evidences.writing.value
-                 + this.Evidences.orbs.value
-                 + this.Evidences.box.value
-      },
-      {
-        name: "oni",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.temp.value
-                 + this.Evidences.dots.value
-      },
-      {
-        name: "phantom",
-        evidences: this.Evidences.box.value
-                 + this.Evidences.fingerprints.value
-                 + this.Evidences.dots.value
-      },
-      {
-        name: "poltergeist",
-        evidences: this.Evidences.box.value
-                 + this.Evidences.fingerprints.value
-                 + this.Evidences.writing.value
-      },
-      {
-        name: "revenant",
-        evidences: this.Evidences.orbs.value
-                 + this.Evidences.temp.value
-                 + this.Evidences.writing.value
-      },
-      {
-        name: "shade",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.temp.value
-                 + this.Evidences.writing.value
-      },
-      {
-        name: "spirit",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.writing.value
-                 + this.Evidences.box.value
-      },
-      {
-        name: "wraith",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.dots.value
-                 + this.Evidences.box.value
-      },
-      {
-        name: "yurei",
-        evidences: this.Evidences.temp.value
-                 + this.Evidences.orbs.value
-                 + this.Evidences.dots.value
-      },
-      {
-        name: "yokai",
-        evidences: this.Evidences.orbs.value
-                 + this.Evidences.dots.value
-                 + this.Evidences.box.value
-      },
-      {
-        name: "hantu",
-        evidences: this.Evidences.fingerprints.value
-                 + this.Evidences.orbs.value
-                 + this.Evidences.temp.value
-      },
-      {
-        name: "goryo",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.fingerprints.value
-                 + this.Evidences.dots.value
-      },
-      {
-        name: "myling",
-        evidences: this.Evidences.fingerprints.value
-                 + this.Evidences.emf.value
-                 + this.Evidences.writing.value
-      },
-      {
-        name: "onryo",
-        evidences: this.Evidences.box.value
-                 + this.Evidences.orbs.value
-                 + this.Evidences.temp.value
-      },
-      {
-        name: "twins",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.box.value
-                 + this.Evidences.temp.value
-      },
-      {
-        name: "raiju",
-        evidences: this.Evidences.emf.value
-                 + this.Evidences.orbs.value
-                 + this.Evidences.dots.value
-      },
-      {
-        name: "obake",
-        evidences: this.Evidences.fingerprints.value
-                 + this.Evidences.emf.value
-                 + this.Evidences.orbs.value
-      },
-      {
-        name: "mimic",
-        evidences: this.Evidences.box.value
-                 + this.Evidences.fingerprints.value
-                 + this.Evidences.temp.value
-      }
-    ]
-
     this.state = {
       evidences_yes: 0,
       evidences_not: 0,
-      possible_ghosts: this.Ghosts
     }
 
     this.toggleEvidence = this.toggleEvidence.bind(this);
@@ -218,41 +87,10 @@ class OverlayApp extends React.Component {
 
 
   setEvidences(new_evidences_yes, new_evidences_not) {
-    var new_possible_ghosts = this.calculateGhosts(this.Ghosts, new_evidences_yes, new_evidences_not)
-
     this.setState({
       evidences_yes: new_evidences_yes,
       evidences_not: new_evidences_not,
-      possible_ghosts: new_possible_ghosts
     });
-  }
-
-  calculateGhosts(ghosts, evidences_yes, evidences_not) {
-    return ghosts.filter( (ghost) => {
-      // evidence = 0110
-      // ghost    = 0111
-      // ----------------
-      // and      = 0110
-      var matches_yes = (ghost.evidences & evidences_yes) === evidences_yes
-
-      // evidence = 1001
-      // ghost    = 0111
-      // ----------------
-      // and      = 0001
-      var matches_not = (ghost.evidences & evidences_not) !== 0
-
-      return matches_yes && !matches_not
-    })
-  }
-
-  calculateMissing(ghost) {
-    var missing = ghost.evidences - this.state.evidences_yes
-
-    var missing_evidences = Object.entries(this.Evidences).filter((item) => {
-      var evidence = item[1]
-      return( (missing & evidence.value) === evidence.value )
-    })
-    return missing_evidences
   }
 
   render() {
@@ -264,32 +102,6 @@ class OverlayApp extends React.Component {
         </div>
       </div>
       </div>
-    );
-  }
-}
-
-class Ghost extends React.Component {
-  render() {
-    var missing = []
-
-    if (this.props.missing.length > 0) {
-      var missing_names = this.props.missing.map((item) => {
-        return item[1].name
-      })
-      missing = missing_names
-    }
-
-    var ghost_name_key = "Ghost." + this.props.ghost.name + ".name"
-
-    return (
-      <tr>
-        <th>
-          <FormattedMessage id={ghost_name_key} defaultMessage={this.props.ghost.name} />
-        </th>
-        <td>
-          {missing.map((name) => <img src={"img/" + name + ".svg"} width="50px" height="50px" alt={name} />)}
-        </td>
-      </tr>
     );
   }
 }

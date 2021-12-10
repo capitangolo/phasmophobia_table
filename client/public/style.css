@@ -37,3 +37,7 @@ button.evidence .red {
 td img {
   padding: 10px;
 }
+
+td img.optional {
+  opacity: 0.3;
+}
