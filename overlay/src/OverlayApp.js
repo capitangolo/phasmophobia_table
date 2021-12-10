@@ -168,6 +168,12 @@ class OverlayApp extends React.Component {
         evidences: this.Evidences.fingerprints.value
                  + this.Evidences.emf.value
                  + this.Evidences.orbs.value
+      },
+      {
+        name: "mimic",
+        evidences: this.Evidences.box.value
+                 + this.Evidences.fingerprints.value
+                 + this.Evidences.temp.value
       }
     ]
 

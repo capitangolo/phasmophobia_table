@@ -28,7 +28,8 @@
     "Ghost.onryo.name": "Onryo",
     "Ghost.twins.name": "The Twins",
     "Ghost.raiju.name": "Raiju",
-    "Ghost.obake.name": "Obake"
+    "Ghost.obake.name": "Obake",
+    "Ghost.mimic.name": "The mimic"
   },
   "es": {
     "Evidence.list.title": "Evidencias",
@@ -59,7 +60,8 @@
     "Ghost.onryo.name": "Onryo",
     "Ghost.twins.name": "Los Gemelos",
     "Ghost.raiju.name": "Raiju",
-    "Ghost.obake.name": "Obake"
+    "Ghost.obake.name": "Obake",
+    "Ghost.mimic.name": "Mímico"
 
   }
 }
