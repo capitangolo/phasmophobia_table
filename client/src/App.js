@@ -215,6 +215,27 @@ class App extends React.Component {
                  + this.Evidences.fingerprints.value
                  + this.Evidences.temp.value,
         evicences_optional: this.Evidences.orbs.value
+      },
+      {
+        name: "deogen",
+        evidences: this.Evidences.box.value
+                 + this.Evidences.writing.value
+                 + this.Evidences.dots.value,
+        evicences_optional: this.Evidences.orbs.value
+      },
+      {
+        name: "moroi",
+        evidences: this.Evidences.box.value
+                 + this.Evidences.temp.value
+                 + this.Evidences.writing.value,
+        evicences_optional: this.Evidences.orbs.value
+      },
+      {
+        name: "thaye",
+        evidences: this.Evidences.orbs.value
+                 + this.Evidences.writing.value
+                 + this.Evidences.dots.value,
+        evicences_optional: this.Evidences.orbs.value
       }
     ]
 

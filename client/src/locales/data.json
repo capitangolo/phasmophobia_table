@@ -29,7 +29,10 @@
     "Ghost.twins.name": "The Twins",
     "Ghost.raiju.name": "Raiju",
     "Ghost.obake.name": "Obake",
-    "Ghost.mimic.name": "The mimic"
+    "Ghost.mimic.name": "The mimic",
+    "Ghost.deogen.name": "Deogen",
+    "Ghost.moroi.name": "Moroi",
+    "Ghost.thaye.name": "Thaye"
   },
   "es": {
     "Evidence.list.title": "Evidencias",
@@ -61,7 +64,9 @@
     "Ghost.twins.name": "Los Gemelos",
     "Ghost.raiju.name": "Raiju",
     "Ghost.obake.name": "Obake",
-    "Ghost.mimic.name": "Mímico"
-
+    "Ghost.mimic.name": "Mímico",
+    "Ghost.deogen.name": "Deogen",
+    "Ghost.moroi.name": "Moroi",
+    "Ghost.thaye.name": "Thaye"
   }
 }
