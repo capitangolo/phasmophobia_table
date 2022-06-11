@@ -221,21 +221,21 @@ class App extends React.Component {
         evidences: this.Evidences.box.value
                  + this.Evidences.writing.value
                  + this.Evidences.dots.value,
-        evicences_optional: this.Evidences.orbs.value
+        evicences_optional: 0
       },
       {
         name: "moroi",
         evidences: this.Evidences.box.value
                  + this.Evidences.temp.value
                  + this.Evidences.writing.value,
-        evicences_optional: this.Evidences.orbs.value
+        evicences_optional: 0
       },
       {
         name: "thaye",
         evidences: this.Evidences.orbs.value
                  + this.Evidences.writing.value
                  + this.Evidences.dots.value,
-        evicences_optional: this.Evidences.orbs.value
+        evicences_optional: 0
       }
     ]
 
