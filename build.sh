@@ -10,3 +10,5 @@ cd ../overlay
 npm install
 npm run-script build
 cp -a build ../backend/public/overlay
+cd ../backend
+npm install
