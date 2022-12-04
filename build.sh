@@ -1,5 +1,7 @@
 #!/bin/bash
-mkdir backend/public
+rm -rf backend/public/client
+rm -rf backend/public/overlay
+mkdir -p backend/public
 cd client
 npm install
 npm run-script build
