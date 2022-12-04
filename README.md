@@ -6,7 +6,7 @@ A tool to get the ghost given the collected proof
 1. Install node and npm
 2. Install react
 
-I'm using node `v14.3.0` & npm `6.14.4`
+I'm using node `v18.12.1` & npm `8.19.2`
 
 ## Build instructions
 
