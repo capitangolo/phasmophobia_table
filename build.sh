@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir /backend/public
+mkdir backend/public
 cd client
 npm install
 npm run-script build
