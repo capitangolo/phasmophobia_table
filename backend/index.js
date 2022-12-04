@@ -8,12 +8,8 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 
 // Rutes
-app.use('/',express.static('../client/build'))
-app.use('/overlay',express.static('../overlay/build'))
-//app.get('/public', (req, res) => {
-//express.static('files')
-//  res.sendFile(__dirname + '../client/build');
-//});
+app.use('/',express.static('public/client'))
+app.use('/overlay',express.static('public/overlay'))
 
 // Sockets
 let sockets = {}

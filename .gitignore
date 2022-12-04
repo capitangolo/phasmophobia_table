@@ -1,3 +1,7 @@
+# App
+backend/public/client
+backend/public/overlay
+
 # Logs
 logs
 *.log

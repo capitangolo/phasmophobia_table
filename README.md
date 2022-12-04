@@ -18,19 +18,11 @@ Currently the web page with the interactive UI, the overlay, and the backend are
 
 So:
 
-1. Build the overlay
-2. Build the client
-3. Start the backend
+1. Build the overlay & client
+2. Start the backend
 
 ```
-cd overlay
-npm run-script build
-cd ../client
-npm run-script build
-cd ../
-```
-
-```
+./build.sh
 cd backend
 npm start
 ```
